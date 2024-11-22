@@ -1,0 +1,44 @@
+<CX600-X8_TEST_CEA>display interface description | include D85000
+
+PHY: Physical
+*down: administratively down
+^down: standby
+(l): loopback
+(s): spoofing
+(E): E-Trunk down
+(b): BFD down
+(B): Bit-error-detection down
+(e): ETHOAM down
+(d): Dampening Suppressed
+Interface                     PHY     Protocol Description
+GE1/0/4                       down    down     ## D85000_TEST_CCT ##
+
+
+<CX600-X8_TEST_CEA>display current-configuration interface GigabitEthernet 1/0/4
+<CX600-X8_TEST_CEA>system
+
+[CX600-X8_TEST_CEA]interface	
+        
+[CX600-X8_TEST_CEA]interface GigabitEthernet 1/0/4
+
+[CX600-X8_TEST_CEA-GigabitEthernet1/0/4]display this
+
+#
+interface GigabitEthernet1/0/4
+ description ## D85000_TEST_CCT ##
+ undo shutdown
+ traffic-policy 201_IN inbound
+ undo dcn
+ user-queue cir 2000 pir 2000 flow-queue 201 inbound
+ user-queue cir 2000 pir 2000 flow-queue 201 outbound
+#
+
+[CX600-X8_TEST_CEA-GigabitEthernet1/0/4]undo user-queue inbound 
+[CX600-X8_TEST_CEA-GigabitEthernet1/0/4]display this
+
+
+undo user-queue inbound
+undo user-queue outbound
+
+user-queue cir 5000 pir 5000 flow-queue 201 inbound
+user-queue cir 5000 pir 5000 flow-queue 201 outbound
